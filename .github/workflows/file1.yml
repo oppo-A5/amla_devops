@@ -22,7 +22,7 @@ jobs:
       
       - name: Create Azure Instance
         run: |
-          az group create --name devops_znode --location East US
+          az group create --name devops_znode --location eastus
           az vm create \
             --resource-group devops_znode \
             --name myVM \
