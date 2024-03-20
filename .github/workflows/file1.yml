@@ -25,8 +25,8 @@ jobs:
           az group create --name devops_znode --location eastus
           az vm create \
             --resource-group devops_znode \
-            --name myVM \
-            --image UbuntuLTS \
+            --name my_first_vm \
+            --image Ubuntu Server 22.04 LTS  \
             --admin-username azureuser \
             --admin-password MyPassword12345
     
