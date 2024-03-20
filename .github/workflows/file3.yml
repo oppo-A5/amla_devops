@@ -1,0 +1,30 @@
+name: Create Azure Storage Account
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-storage:
+        description: 'Create Azure Storage Account'
+        required: true
+
+jobs:
+  create-storage-account:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Azure Storage Account
+        run: |
+          az storage account create \
+            --name mystorageacnikmesh \
+            --resource-group devops_znode \
+            --location eastus \
+            --sku Standard_LRS \
+            --encryption-services blob
+      
