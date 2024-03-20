@@ -24,7 +24,7 @@ jobs:
         with:
           resourceGroupName: devops_znode
           template: templates/aks.json
-          parameters: aks_cluster_name=myclusterdevops
+          parameters: aks_cluster_name=mydevopscluster
                       location=eastus
                 
       
