@@ -22,4 +22,4 @@ jobs:
 
       - name: Create Azure Container Registry
         run: |
-           az acr create --resource-group devops_znode --name first_registry --sku Basic --location eastus
+           az acr create --resource-group devops_znode --name firstregistry --sku Basic --location eastus
