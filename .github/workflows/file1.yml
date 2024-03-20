@@ -26,7 +26,7 @@ jobs:
           az vm create \
             --resource-group devops_znode \
             --name my_first_vm \
-            --image Ubuntu Server 22.04 LTS  \
+            --image Ubuntu-20.04-LTS  \
             --admin-username azureuser \
             --admin-password MyPassword12345
     
