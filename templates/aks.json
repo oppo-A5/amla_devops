@@ -1,7 +1,7 @@
 {
     "id": "/subscriptions/e57faae6-aa33-430d-aac5-fd9ec990dc4a/resourcegroups/devops_znode/providers/Microsoft.ContainerService/managedClusters/mydevopscluster",
     "location": "eastus",
-    "name": "mydevopscluster",
+    "name": "mydevopscluster12",
     "type": "Microsoft.ContainerService/ManagedClusters",
     "properties": {
         "provisioningState": "Creating",
