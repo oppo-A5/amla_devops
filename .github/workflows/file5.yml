@@ -1,0 +1,30 @@
+name: Create AKS Cluster
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-aks:
+        description: 'Create AKS Cluster'
+        required: true
+
+jobs:
+  create-aks-cluster:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create AKS Cluster
+        run: |
+          az aks create \
+            --resource-group devops_znode \
+            --name devopsAksCluster12 \
+            --node-count 2 \
+            --enable-addons monitoring \
+            --generate-ssh-keys
+      
