@@ -1,1 +1,33 @@
 
+name: Create Azure Instance
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create-instance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Create Azure Instance
+        run: |
+          az group create --name myResourceGroup --location eastus
+          az vm create \
+            --resource-group myResourceGroup \
+            --name myVM \
+            --image UbuntuLTS \
+            --admin-username azureuser \
+            --admin-password MyPassword12345
+      
+      - name: Show Azure VM Details
+        run: |
+          az vm show --resource-group myResourceGroup --name myVM --query 'publicIps' --output tsv
