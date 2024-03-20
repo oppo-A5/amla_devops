@@ -1,1 +1,25 @@
 
+name: Create Azure Container Registry
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-acr:
+        description: 'Create Azure Container Registry'
+        required: true
+
+jobs:
+  create-acr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Azure Container Registry
+        run: |
+           az acr create --resource-group devops_znode --name first_registry --sku Basic --location eastus
