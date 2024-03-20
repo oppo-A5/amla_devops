@@ -1,0 +1,30 @@
+name: Create Azure SQL Server
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-sql-server:
+        description: 'Create Azure SQL Server'
+        required: true
+
+jobs:
+  create-sql-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Azure SQL Server
+        run: |
+          az sql server create \
+            --name mySqlServernik \
+            --resource-group devops_znode \
+            --location eastus \
+            --admin-user nikhilmeshram \
+            --admin-password nikhil12345 \
+            --enable-public-network true
