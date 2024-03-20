@@ -19,12 +19,12 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Create AKS Cluster
-        run: |
-          az aks create \
-            --resource-group devops_znode \
-            --name devopsAksCluster12 \
-            --node-count 2 \
-            --enable-addons monitoring \
-            --generate-ssh-keys
+      - name: create aks cluster
+        uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: devops_znode
+          template: templates/aks.json
+          parameters: aks_cluster_name=myclusterdevops
+                      location=eastus
+                
       
