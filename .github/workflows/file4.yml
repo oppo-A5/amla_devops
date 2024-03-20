@@ -26,5 +26,5 @@ jobs:
             --resource-group devops_znode \
             --location eastus \
             --admin-user nikhilmeshram \
-            --admin-password nikhil12345 \
+            --admin-password Nikhil@12345 \
             --enable-public-network true
