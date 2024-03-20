@@ -22,9 +22,9 @@ jobs:
       
       - name: Create Azure Instance
         run: |
-          az group create --name znode-dev-1-vm_group --location North Central US
+          az group create --name devops_znode --location East US
           az vm create \
-            --resource-group znode-dev-1-vm_group \
+            --resource-group devops_znode \
             --name myVM \
             --image UbuntuLTS \
             --admin-username azureuser \
