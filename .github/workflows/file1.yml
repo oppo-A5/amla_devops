@@ -2,9 +2,11 @@
 name: Create Azure Instance
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      create-instance:
+        description: 'Create Azure Instance'
+        required: true
 
 jobs:
   create-instance:
@@ -20,7 +22,7 @@ jobs:
       
       - name: Create Azure Instance
         run: |
-          az group create --name znode-dev-1-vm_group --location eastus
+          az group create --name znode-dev-1-vm_group --location North Central US
           az vm create \
             --resource-group znode-dev-1-vm_group \
             --name myVM \
