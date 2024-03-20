@@ -20,14 +20,11 @@ jobs:
       
       - name: Create Azure Instance
         run: |
-          az group create --name myResourceGroup --location eastus
+          az group create --name znode-dev-1-vm_group --location eastus
           az vm create \
-            --resource-group myResourceGroup \
+            --resource-group znode-dev-1-vm_group \
             --name myVM \
             --image UbuntuLTS \
             --admin-username azureuser \
             --admin-password MyPassword12345
-      
-      - name: Show Azure VM Details
-        run: |
-          az vm show --resource-group myResourceGroup --name myVM --query 'publicIps' --output tsv
+    
