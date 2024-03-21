@@ -25,6 +25,7 @@ jobs:
             --name DevopsDemoCluster \
             --node-count 1 \
             --node-vm-size B2ats_v2 \
+            --ssh-key-value /home/nikhil/.ssh/nikhil \
             --enable-managed-identity \
             --enable-addons monitoring \
             --kubernetes-version 1.22.0 \
