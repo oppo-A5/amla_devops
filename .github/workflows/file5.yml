@@ -1,31 +1,32 @@
 name: Create AKS Cluster
 
 on:
-  workflow_dispatch:
-    inputs:
-      create-aks:
-        description: 'Create AKS Cluster'
-        required: true
+  workflow_dispatch:  
 
 jobs:
   create-aks-cluster:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Log in to Azure
+      - name: Login to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: create aks cluster
-        uses: azure/arm-deploy@v1
-        with:
-          resourceGroupName: devops_znode
-          template: templates/aks.json
-          
-                
-      
-                
-      
+      - name: Set Azure subscription
+        run: az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
+      - name: Create AKS cluster
+        run: |
+          az aks create \
+            --resource-group devops_znode \
+            --name DevopsDemoCluster \
+            --node-count 1 \
+            --node-vm-size B2ats_v2 \
+            --generate-ssh-keys \
+            --enable-managed-identity \
+            --enable-addons monitoring \
+            --kubernetes-version 1.22.0 \
+            --location eastus
