@@ -21,7 +21,7 @@ jobs:
       - name: Create AKS cluster
         run: |
           az aks create \
-            --resource-group my_resource_group \
+            --resource-group DefaultResourceGroup-EUS \
             --name DevopsDemoCluster \
             --node-count 1 \
             --node-vm-size standard_b16pls_v2 \
@@ -30,4 +30,4 @@ jobs:
             --enable-managed-identity \
             --enable-addons monitoring \
             --kubernetes-version 1.22.0 \
-            --location centralus
+            --location eastus
