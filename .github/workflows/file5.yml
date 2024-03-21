@@ -31,7 +31,7 @@ jobs:
         run: |
           eksctl create cluster \
             --name first-demo-cluster \
-            --version 1.21 \
+            --version 1.23 \
             --node-type t3.medium \
             --nodes 1 \
             --region ap-south-1
