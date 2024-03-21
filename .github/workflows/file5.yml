@@ -19,6 +19,7 @@ jobs:
         run: az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       - name: Create AKS cluster
+        working-directory: /home/runner
         run: |
           az aks create \
             --resource-group devops_znode \
