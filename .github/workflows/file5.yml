@@ -25,7 +25,6 @@ jobs:
             --name DevopsDemoCluster \
             --node-count 1 \
             --node-vm-size B2ats_v2 \
-            --generate-ssh-keys --name test \
             --enable-managed-identity \
             --enable-addons monitoring \
             --kubernetes-version 1.22.0 \
