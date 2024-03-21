@@ -1,33 +1,28 @@
-name: Create AKS Cluster
+name: Create EKS Cluster
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:  # Manually trigger the workflow
 
 jobs:
-  create-aks-cluster:
+  create-eks-cluster:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to Azure
-        uses: azure/login@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Set Azure subscription
-        run: az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-
-      - name: Create AKS cluster
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.REGION }} 
+      - name: Create EKS cluster
         run: |
-          az aks create \
-            --resource-group my_resource_group \
-            --name DevopsDemoCluster \
-            --node-count 1 \
-            --node-vm-size standard_b16pls_v2 \
-            --generate-ssh-keys \
-            --ssh-key-value /home/runner/.ssh/id_rsa
-            --enable-managed-identity \
-            --enable-addons monitoring \
-            --kubernetes-version 1.22.0 \
-            --location centralus
+          eksctl create cluster \
+            --name first-demo-cluster \
+            --version 1.21 \
+            --node-type t3.medium \
+            --nodes 1 \
+            --region ${{ secrets.REGION }}
+
+      
