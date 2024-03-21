@@ -19,7 +19,6 @@ jobs:
         run: az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       - name: Create AKS cluster
-        working-directory: /home/runner
         run: |
           az aks create \
             --resource-group devops_znode \
@@ -27,6 +26,7 @@ jobs:
             --node-count 1 \
             --node-vm-size B2ats_v2 \
             --generate-ssh-keys \
+            --ssh-key-value /home/runner/.ssh/id_rsa
             --enable-managed-identity \
             --enable-addons monitoring \
             --kubernetes-version 1.22.0 \
