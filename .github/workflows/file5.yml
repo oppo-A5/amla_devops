@@ -24,7 +24,7 @@ jobs:
             --resource-group devops_znode \
             --name DevopsDemoCluster \
             --node-count 1 \
-            --node-vm-size B2ats_v2 \
+            --node-vm-size standard_b16pls_v2 \
             --generate-ssh-keys \
             --ssh-key-value /home/runner/.ssh/id_rsa
             --enable-managed-identity \
