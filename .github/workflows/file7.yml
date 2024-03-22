@@ -13,6 +13,11 @@ jobs:
 
       - name: Install Azure CLI
         uses: azure/cli@v2
+        with:
+           azcliversion: 2.30.0
+           inlineScript: |
+                  chmod +x $GITHUB_WORKSPACE/sampleScript.sh
+                  $GITHUB_WORKSPACE/sampleScript.sh
 
       - name: Log in to Azure
         uses: azure/login@v1
