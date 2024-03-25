@@ -26,7 +26,7 @@ jobs:
 
     - name: create acr
       uses: azure/arm-deploy@v1
-       with:
+      with:
            resourceGroupName: nikhil-meshram
            template: templates/acr.json
            parameters: znode10_registry_name= demo-acr, location=eastus
