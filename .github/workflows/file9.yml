@@ -19,4 +19,8 @@ jobs:
     - name: Deploy ACR
       uses: Azure/cli@v1
       with:
-        template: templates/acr.json
+        azcliversion: 2.0.72
+        inlineScript: |
+          az deployment group create \
+            --template-file templates/acr.json \
+    
