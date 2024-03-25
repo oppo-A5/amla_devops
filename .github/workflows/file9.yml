@@ -1,4 +1,4 @@
-name: Create ACR
+name: Create ACR on azure
 
 on:
   workflow_dispatch
