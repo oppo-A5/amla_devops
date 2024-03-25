@@ -6,10 +6,10 @@
     "variables": {},
     "resources": [ 
         {
-            "name": "my-first-cr",
+            "name": "containerRegistry1",
             "type": "Microsoft.ContainerRegistry/registries",
             "apiVersion": "2023-07-01",
-            "location": "eastus",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Classic"
             },
