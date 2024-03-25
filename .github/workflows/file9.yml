@@ -17,10 +17,18 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: create resource group
-        uses: Azure/CLI@v1
-        with:
+      uses: Azure/CLI@v1
+      with:
           inlineScript: |
             #!/bin/bash
             az group create --name nikhil-meshram --location eastus
             echo "Azure resource group created"
+
+    - name: create acr
+      uses: azure/arm-deploy@v1
+       with:
+           resourceGroupName: nikhil-meshram
+           template: templates/acr.json
+           parameters: znode10_registry_name= demo-acr, location=eastus
+
     
