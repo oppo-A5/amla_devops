@@ -4,16 +4,7 @@
     "parameters": {},
     "functions": [],
     "variables": {},
-    "resources": [
-        {
-            "name": "nikhil-meshram",
-            "type": "Microsoft.Resources/resourceGroups",
-            "apiVersion": "2022-09-01",
-            "location": "eastus",
-            "dependsOn": [],
-            "tags": {}
-        }, 
-        
+    "resources": [ 
         {
             "name": "my-first-cr",
             "type": "Microsoft.ContainerRegistry/registries",
