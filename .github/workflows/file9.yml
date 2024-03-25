@@ -21,6 +21,5 @@ jobs:
       with:
         azcliversion: 2.0.72
         inlineScript: |
-          az deployment group create \
             --template-file templates/acr.json \
     
