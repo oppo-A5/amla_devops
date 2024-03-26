@@ -1,34 +1,51 @@
-name: Create ACR on azure
+name: Create Azure Resources for Non-Prod
 
 on:
-  workflow_dispatch
-
+  workflow_dispatch:
+    inputs:
+      tenant:
+        type: string
+        description: Enter new tenant name
+        required: true
+      location:
+        type: choice
+        description: Select the region
+        required: true
+        options:
+        - centralus
+        - eastus
+      environment:
+        type: choice
+        description: Select the az subscription
+        required: true
+        options:
+        - nonprod
 jobs:
-  create-acr:
+  create_azure_resources:
     runs-on: ubuntu-latest
-
+    environment: ${{ github.event.inputs.environment }}
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: checkout code
+        uses: actions/checkout@v2
+        with: 
+            ref: master
 
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: create resource group
-      uses: Azure/CLI@v1
-      with:
+      - name: create resource group
+        uses: Azure/CLI@v1
+        with:
           inlineScript: |
             #!/bin/bash
-            az group create --name nikhil-meshram --location eastus
+            az group create --name ${{ inputs.tenant }}${{ inputs.environment }}rg --location ${{ inputs.location }}
             echo "Azure resource group created"
 
-    - name: create acr
-      uses: azure/arm-deploy@v1
-      with:
-           resourceGroupName: nikhil-meshram
-           template: templates/acr.json
-           parameters: znode10_registry_name= demo-acr, location=eastus
-
-    
+      - name: create acr
+        uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: ${{ inputs.tenant }}${{ inputs.environment }}rg
+          template: templates/acr.json
+          parameters: znode10_registry_name=${{ inputs.tenant }}${{ inputs.environment }}registry #location=${{ inputs.location }}
