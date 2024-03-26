@@ -1,4 +1,4 @@
-name: Create Azure Resources for Non-Prod
+name: Create Azure Resources demo
 
 on:
   workflow_dispatch:
